@@ -1,0 +1,31 @@
+default_language_version:
+  python: python3
+
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.16.3
+    hooks:
+      - id: ruff
+        args: [--fix]
+
+  - repo: https://github.com/psf/black
+    rev: 24.10.0
+    hooks:
+      - id: black
+
+  - repo: https://github.com/Riverside-Healthcare/djLint
+    rev: v1.44.2
+    hooks:
+      - id: djlint-reformat-django
+      - id: djlint
+        args: [--reformat]
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: [--maxkb=1024]

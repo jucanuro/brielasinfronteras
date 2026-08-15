@@ -1,0 +1,56 @@
+[project]
+name = "brielasinfronteras"
+version = "0.1.0"
+description = "Sitio web de la ONG Briela Sin Fronteras (Wagtail + Tailwind)."
+requires-python = ">=3.12,<3.13"
+license = { text = "MIT" }
+dependencies = [
+  "django>=5.0,<5.1",
+  "wagtail>=6.1,<7.0",
+  "psycopg[binary]>=3.1,<4.0",
+  "gunicorn>=22.0,<23.0",
+  "whitenoise>=6.6,<7.0",
+  # django-environ: unica dependencia fuera del stack base, necesaria para
+  # leer DATABASE_URL y demas variables desde .env de forma segura.
+  "django-environ>=0.11,<0.12",
+]
+
+[project.optional-dependencies]
+dev = [
+  "ruff>=0.6,<1.0",
+  "black>=24.0,<25.0",
+  "djlint>=1.34,<2.0",
+  "pre-commit>=3.7,<4.0",
+  "pytest>=8.0,<9.0",
+  "pytest-django>=4.8,<5.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+bypass-selection = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["**/migrations/*.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "DJ", "B"]
+
+[tool.black]
+line-length = 100
+target-version = ["py312"]
+extend-exclude = "migrations/"
+
+[tool.djlint]
+profile = "django"
+indent = 2
+ignore = "H006"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings.dev"
+python_files = ["test_*.py", "*_test.py", "tests.py"]
+testpaths = ["src"]

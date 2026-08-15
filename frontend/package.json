@@ -1,0 +1,14 @@
+{
+  "name": "brielasinfronteras-frontend",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Fuente de estilos (Tailwind CSS) del sitio de Briela Sin Fronteras.",
+  "scripts": {
+    "watch": "tailwindcss -i ./src/styles/main.css -o ../src/static/css/main.css --watch=always --poll",
+    "build": "tailwindcss -i ./src/styles/main.css -o ../src/static/css/main.css --minify"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.0",
+    "tailwindcss": "^4.1.0"
+  }
+}
