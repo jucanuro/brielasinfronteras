@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     "proyectos",
     "testimonios",
     "contacto",
+    "pagos",
     # Wagtail
     "wagtail.contrib.settings",
     "wagtail.contrib.forms",

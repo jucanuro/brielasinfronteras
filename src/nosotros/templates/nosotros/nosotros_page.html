@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% block body_class %}template-nosotros{% endblock %}
+{% block content %}
+  <main>
+    <h1>{{ page.title }}</h1>
+    {% if page.intro %}{{ page.intro|richtext }}{% endif %}
+    <h2>Misión</h2>
+    {{ page.mision|richtext }}
+    <h2>Visión</h2>
+    {{ page.vision|richtext }}
+    {% if page.valores.all %}
+      <h2>Valores</h2>
+      <ul>
+        {% for valor in page.valores.all %}
+          <li>{{ valor.nombre }} — {{ valor.descripcion }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% if page.equipo.all %}
+      <h2>Equipo</h2>
+      <ul>
+        {% for integrante in page.equipo.all %}
+          {% if integrante.activo %}<li>{{ integrante.nombre }} — {{ integrante.cargo }}</li>{% endif %}
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </main>
+{% endblock %}

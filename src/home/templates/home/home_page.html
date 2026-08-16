@@ -2,11 +2,25 @@
 {% block body_class %}template-homepage{% endblock %}
 {% block content %}
   <main>
-    <h1>{{ page.title }}</h1>
+    <h1>{{ page.titular|default:page.title }}</h1>
+    {% if page.subtitulo %}<p>{{ page.subtitulo }}</p>{% endif %}
     <p>
-      Cimientos del sitio de Briela Sin Fronteras funcionando. El contenido
-      real de esta página (hero en video, cifras de impacto, áreas de
-      trabajo, proyectos, testimonios) llega en las siguientes fases.
+      Stub de Fase 1: prueba que el contenido de HomePage se lee desde la base
+      de datos. El diseño real llega en la Fase 2/3.
     </p>
+    {% if page.cifras_impacto.all %}
+      <ul>
+        {% for cifra in page.cifras_impacto.all %}
+          <li>{{ cifra.numero }}{{ cifra.sufijo }} — {{ cifra.etiqueta }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% if page.botones_hero.all %}
+      <p>
+        {% for boton in page.botones_hero.all %}
+          <a href="{% if boton.pagina_destino %}{{ boton.pagina_destino.url }}{% else %}{{ boton.url_externa }}{% endif %}">{{ boton.texto }}</a>
+        {% endfor %}
+      </p>
+    {% endif %}
   </main>
 {% endblock %}

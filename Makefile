@@ -1,4 +1,4 @@
-.PHONY: up down build logs migrate makemigrations shell dbshell superuser lint fmt test
+.PHONY: up down build logs migrate makemigrations shell dbshell superuser seed lint fmt test
 
 up:
 	docker compose up
@@ -26,6 +26,9 @@ dbshell:
 
 superuser:
 	docker compose run --rm web python manage.py createsuperuser
+
+seed:
+	docker compose run --rm web python manage.py seed_demo
 
 lint:
 	docker compose run --rm web ruff check .

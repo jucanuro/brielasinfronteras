@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% block body_class %}template-areas-index{% endblock %}
+{% block content %}
+  <main>
+    <h1>{{ page.title }}</h1>
+    {% if page.intro %}{{ page.intro|richtext }}{% endif %}
+    <ul>
+      {% for area in page.get_children.live.specific %}
+        {% if area.activo %}
+          <li><a href="{{ area.url }}">{{ area.title }}</a> — {{ area.descripcion_corta }}</li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </main>
+{% endblock %}
